@@ -1,28 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
-</head>
-<body>
+  </head>
+  <body>
     <h1>Crypto Coin & Token Quotes</h1>
-    <section>
-        <button class="js-listAll" onclick="cryptoQuote">List All</button>
+    <!-- <section>
+      <button class="css-list-all js-listAll" type="submit">
+        List All
+      </button>
+    </section> -->
+    <form action="#" method="GET" class="css-search-form js-form">
+      <section>
+        <button
+          class="css-list-all js-listAll"
+          id="js-listAll"
+          type="submit"
+          value="listAll"
+        >
+          List All
+        </button>
+      </section>
+      <section>
+        <button class="js-search" id="js-search" type="submit" value="search">
+          Search
+        </button>
+        <input
+          type="text"
+          name="userInput"
+          class="js-cryptoInputField"
+          placeholder="Enter Name or Ticker Symbol"
+        />
+      </section>
+    </form>
+    <section class="css-crypto-container">
+      <table
+        class="js-quote-table-body"
+        style="width: 100%;"
+        <!--
+        id="js-quote-table-format"
+        --
+      ></table>
     </section>
-    <form action="#" class="js-search-form">
-        <section>
-            <label>
-                Crypto Name:
-            </label>
-            <!-- <button class="js-listAll" type="submit" onclick="cryptoQuote()">List All</button> -->
-            <button class="js-cryptoQuote" onclick="cryptoQuote">Search</button>
-            <input type="text" name="name">
-        </section>
-    </form >
-    <section class="js-crypto-container"></section>
     <script src="cryptoQuote.js"></script>
-</body>
+  </body>
 </html>

@@ -1,0 +1,38 @@
+html {
+    font-size: 16px;
+  }
+  h1 {
+    font-size: 36px;
+  }
+  body {
+    background-color: rgb(30, 30, 30);
+    color: rgb(220, 220, 220);
+  }
+  [type="submit"] {
+    background-color: #00ffea;
+    color: #0f1917;
+    font-size: 1.5rem;
+  }
+  [type="text"] {
+    font-size: 1.5rem;
+    width: 315px;
+  }
+  .css-list-all {
+    margin-bottom: 8px;
+  }
+  .css-search-form {
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+  .css-crypto-container {
+    margin-top: 15px;
+  }
+  .quote-table-format td,
+  th {
+    text-align: left;
+    border: 1px solid black;
+  }
+  .quote-table-format {
+    border-collapse: collapse;
+  }
+  
