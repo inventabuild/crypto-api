@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <h1>Crypto Coin & Token Quotes</h1>
+    <section>
+        <button class="js-listAll" onclick="cryptoQuote">List All</button>
+    </section>
+    <form action="#" class="js-search-form">
+        <section>
+            <label>
+                Crypto Name:
+            </label>
+            <!-- <button class="js-listAll" type="submit" onclick="cryptoQuote()">List All</button> -->
+            <button class="js-cryptoQuote" onclick="cryptoQuote">Search</button>
+            <input type="text" name="name">
+        </section>
+    </form >
+    <section class="js-crypto-container"></section>
+    <script src="cryptoQuote.js"></script>
+</body>
+</html>
