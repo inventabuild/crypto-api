@@ -9,11 +9,6 @@
   </head>
   <body>
     <h1>Crypto Coin & Token Quotes</h1>
-    <!-- <section>
-      <button class="css-list-all js-listAll" type="submit">
-        List All
-      </button>
-    </section> -->
     <form action="#" method="GET" class="css-search-form js-form">
       <section>
         <button
@@ -38,13 +33,16 @@
       </section>
     </form>
     <section class="css-crypto-container">
-      <table
-        class="js-quote-table-body"
-        style="width: 100%;"
-        <!--
-        id="js-quote-table-format"
-        --
-      ></table>
+      <table style="width: 100%;">
+        <thead class="js-quote-thead thead-visibility">
+        <tr class="quote-table">
+          <th>Name</th>
+          <th>Symbol</th>
+          <th>Current Price (USD)</th>
+        </tr>
+      </thead>
+      <tbody class="js-quote-tbody"></tbody>
+      </table>
     </section>
     <script src="cryptoQuote.js"></script>
   </body>

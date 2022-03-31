@@ -3,32 +3,33 @@ const form = document.querySelector(".js-form");
 const cryptoInputField = document.querySelector(".js-cryptoInputField");
 const listAllBtn = document.querySelector(".js-listAll");
 const searchBtn = document.querySelector(".js-search");
+const theader = document.querySelector(".thead-visibility");
 var cryptoInputFromUser = "";
 var listAllClicked = "False";
 
 form.addEventListener("submit", cryptoQuote);
 // listAllBtn.addEventListener("click", listAllFunction);
 // searchBtn.addEventListener("click", searchFunction);
-function listAllFunction(event) {
-  event.preventDefault();
-  debugger;
-  alert(event.target.id);
-  if (event.target.id === "js-listAll") {
-    alert("List All Triggered");
-  }
+// function listAllFunction(event) {
+//   event.preventDefault();
+//   debugger;
+//   alert(event.target.id);
+//   if (event.target.id === "js-listAll") {
+//     alert("List All Triggered");
+//   }
 
-  listAllClicked = "True";
-  cryptoInputFromUser = cryptoInputField.value;
-  cryptoQuote();
-}
-function searchFunction(event) {
-  event.preventDefault();
-  debugger;
-  alert(event);
-  listAllClicked = "False";
-  cryptoInputFromUser = cryptoInputField.value;
-  cryptoQuote(event);
-}
+//   listAllClicked = "True";
+//   cryptoInputFromUser = cryptoInputField.value;
+//   cryptoQuote();
+// }
+// function searchFunction(event) {
+//   event.preventDefault();
+//   debugger;
+//   alert(event);
+//   listAllClicked = "False";
+//   cryptoInputFromUser = cryptoInputField.value;
+//   cryptoQuote(event);
+// }
 function cryptoQuote(event) {
   event.preventDefault();
   cryptoInputFromUser = cryptoInputField.value;
@@ -53,38 +54,32 @@ function buildQuoteTable(response) {
   }
   var header = "";
   var row = "";
-  header = `<tr class="quote-table">
-          <th>Name</th>
-          <th>Symbol</th>
-          <th>Current Price (USD)</th>
+  theader.style.visibility="visible";
+  document.querySelector(".js-quote-tbody").innerHTML=""
+  for (let i = 0; i < response.length; i++) {
+    try{
+    row = `<tr>
+            <td>${response[i].name}</td>
+            <td>${response[i].symbol}</td>
+            <td>${response[i].market_data.current_price.usd}</td>
           </tr>`;
-  document.querySelector(".js-quote-table-body").innerHTML = header;
-  if (listAllClicked === "True") {
-    for (let i = 0; i < response.length; i++) {
-      row = `<tr>
-              <td>${response[i].name}</td>
-              <td>${response[i].symbol}</td>
-              <td>${response[i].market_data.current_price.usd}</td>
-            </tr>`;
-      document.querySelector(".js-quote-table-body").innerHTML += row;
+      document.querySelector(".js-quote-tbody").innerHTML += row;
     }
-  } else {
-    // alert(response.name, cryptoInputFromUser);
-    var success = "False";
-    for (let i = 0; i < response.length; i++) {
-      if (response[i].id === cryptoInputFromUser) {
-        row = `<tr>
-              <td>${response[i].name}</td>
-              <td>${response[i].symbol}</td>
-              <td>${response[i].market_data.current_price.usd}</td>
-            </tr>`;
-        document.querySelector(".js-quote-table-body").innerHTML += row;
-        i = response.length;
-        success = "True";
-      }
-    }
-    if (success === "False") {
+    catch{
+      theader.style.visibility="hidden";
       alert("Your crypto selection is not in our database");
+      return;
     }
   }
+  //   debugger;
+  // if (listAllClicked === "False") {
+  //   var success = "False";
+  //     if (response[i].id === cryptoInputFromUser) {
+  //       success = "True";
+  //   }
+  //   if (success === "False") {
+  //     theader.style.visibility="hidden";
+  //     alert("Your crypto selection is not in our database");
+  //   }
+  // }  
 }

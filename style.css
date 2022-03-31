@@ -35,4 +35,7 @@ html {
   .quote-table-format {
     border-collapse: collapse;
   }
+  .thead-visibility{
+    visibility: hidden;
+  }
   
