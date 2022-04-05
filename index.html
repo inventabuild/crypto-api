@@ -10,6 +10,17 @@
   <body>
     <h1>Crypto Coin & Token Quotes</h1>
     <form action="#" method="GET" class="css-search-form js-form">
+      <section class="search-section">
+        <button class="js-search" id="js-search" type="submit" value="search">
+          Search
+        </button>
+        <input
+        type="text"
+        name="userInput"
+        class="js-cryptoInputField"
+        placeholder="Enter Crypto Name"
+      />
+      </section>
       <section>
         <button
           class="css-list-all js-listAll"
@@ -20,17 +31,6 @@
           List All
         </button>
       </section>
-      <section>
-        <button class="js-search" id="js-search" type="submit" value="search">
-          Search
-        </button>
-        <input
-          type="text"
-          name="userInput"
-          class="js-cryptoInputField"
-          placeholder="Enter Name or Ticker Symbol"
-        />
-      </section>
     </form>
     <section class="css-crypto-container">
       <table style="width: 100%;">
@@ -39,6 +39,7 @@
           <th>Name</th>
           <th>Symbol</th>
           <th>Current Price (USD)</th>
+          <th>% +/- 200 Day Moving Avg</th>
         </tr>
       </thead>
       <tbody class="js-quote-tbody"></tbody>

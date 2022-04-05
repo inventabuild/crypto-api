@@ -8,6 +8,15 @@ html {
     background-color: rgb(30, 30, 30);
     color: rgb(220, 220, 220);
   }
+  button {
+    height: 38px;
+    width: 100px;
+  }
+  input {
+    height: 30px;
+    position: relative;
+    bottom: 1px;
+  }
   [type="submit"] {
     background-color: #00ffea;
     color: #0f1917;
@@ -38,4 +47,6 @@ html {
   .thead-visibility{
     visibility: hidden;
   }
-  
+  .search-section {
+    margin-bottom: 10px;
+  }
