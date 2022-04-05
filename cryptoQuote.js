@@ -40,7 +40,7 @@ function cryptoQuote(event) {
   searchExpression = searchExpressionLowerCase;
   let API_URL = `https://api.coingecko.com/api/v3/coins/`;
   fetch(API_URL)
-    .then((data) => data.json());
+    .then((data) => data.json())
     .then(function (listAllCrypto) {
     let listAllCryptoArray = listAllCrypto;
     return listAllCryptoArray;
