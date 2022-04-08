@@ -39,12 +39,23 @@ function cryptoQuote(event) {
   let searchExpressionLowerCase = searchExpression.toLowerCase();
   searchExpression = searchExpressionLowerCase;
   let API_URL = `https://api.coingecko.com/api/v3/coins/`;
+  debugger;
   fetch(API_URL)
     .then((data) => data.json())
-    .then(function (listAllCrypto) {
-    let listAllCryptoArray = listAllCrypto;
-    return listAllCryptoArray;
-    }
+    .then((responses) => {
+      function findCrypto (response) {
+        // if (response.name.toLowerCase() === searchExpression) {
+        //   alert("Test");
+        //   return response.name.toLowerCase()
+        // }
+        
+        return response.name.toLowerCase() === searchExpression;
+      }
+    debugger;
+    document.querySelector(".js-quote-tbody").innerHTML = responses.filter(findCrypto).map(function(person){return person.name}).join("");
+    debugger;
+    });
+    debugger;
   if (event.submitter.id === "js-search") {
     listAllClicked = "False";
     if (!searchExpression.length > 0){
@@ -59,9 +70,16 @@ function cryptoQuote(event) {
       listAllClicked = "True";
     } 
   }
-  fetch(API_URL)
-    .then((data) => data.json())
-    .then(buildQuoteTable); 
+  // fetch(API_URL)
+  //   .then((data) => data.json())
+  //   .then(buildQuoteTable); 
+}
+function listAllCryptoArray (responses) {
+  function findCryptoInput (response){
+    return response.name.toLowerCase() === searchExpression;
+    debugger;
+  }
+  debugger;
 }
 function buildQuoteTable(response) {
   if (!Array.isArray(response)) {
@@ -102,9 +120,6 @@ function buildQuoteTable(response) {
     debugger;
     return response.name.toLowerCase() === searchExpression;
   }
-  function listAllCryptoArray (response) {
-    let allCryptoArray = response;
-    return allCryptoArray;
-  }
+  
   document.querySelector(".js-quote-tbody").innerHTML = html;
 }
