@@ -5,83 +5,48 @@ const cryptoInputField = document.querySelector(".js-cryptoInputField");
 const listAllBtn = document.querySelector(".js-listAll");
 const searchBtn = document.querySelector(".js-search");
 const theader = document.querySelector(".thead-visibility");
-var listAllClicked = "False";
+var listAllClicked = false;
 var html = "";
 var searchExpression = ""
-
-// document.onkeydown = findKeyCode
-// inputField.addEventListener("keyup", findKeyCode);
-// function findKeyCode(event){
-// event.preventDefault;
-// const unicode = event.which;
-// const searchExpression = inputField.value;
-// if (unicode == 13 && searchExpression.length > 0){
-//   cryptoQuote(event);
-// }
-// else if (unicode == 13 && !searchExpression.length > 0){
-//   theader.style.visibility="hidden";
-//   html = "Enter a name or ticker symbol in the Search field";
-//   document.querySelector(".js-quote-tbody").innerHTML = html;
-//   return false;
-// }
-// else {
-//   return false;
-// }
-// }
+var arrayIndex = ""
 
 form.addEventListener("submit", cryptoQuote);
 function cryptoQuote(event) {
   event.preventDefault();
-  const unicode = event.which;
   theader.style.visibility="hidden";
+  document.querySelector(".js-quote-tbody").style.fontSize = "16px";
   searchExpression = inputField.value;
   inputField.value = "";
   let searchExpressionLowerCase = searchExpression.toLowerCase();
-  searchExpression = searchExpressionLowerCase;
+  searchExpression = searchExpressionLowerCase.trim();
+  if (searchExpression.length === 0) {
+    listAllClicked = true;
+  }
   let API_URL = `https://api.coingecko.com/api/v3/coins/`;
-  debugger;
   fetch(API_URL)
     .then((data) => data.json())
     .then((responses) => {
-      function findCrypto (response) {
-        // if (response.name.toLowerCase() === searchExpression) {
-        //   alert("Test");
-        //   return response.name.toLowerCase()
-        // }
-        
-        return response.name.toLowerCase() === searchExpression;
+      function findCryptoIndex(response) {
+      for (i = 0; i < response.length; i+=1 ) {
+        if (response[i].name.toLowerCase() === searchExpression) {
+          return i
+        }
       }
-    debugger;
-    document.querySelector(".js-quote-tbody").innerHTML = responses.filter(findCrypto).map(function(person){return person.name}).join("");
-    debugger;
-    });
-    debugger;
-  if (event.submitter.id === "js-search") {
-    listAllClicked = "False";
-    if (!searchExpression.length > 0){
-      html = "Enter crypto name in the Search field";
-      document.querySelector(".js-quote-tbody").innerHTML = html;
-      return false;
+      return -1
+      }
+      arrayIndex = findCryptoIndex(responses)
+      if (arrayIndex === -1 && searchExpression.length > 0) {
+        document.querySelector(".js-quote-tbody").style.fontSize = "25px";
+        document.querySelector(".js-quote-tbody").innerHTML = "You're selection is not in our database.  Please try again.";
+        return false;
+      }
+      buildQuoteTable(responses);
     }
-    else if (searchExpression.length > 0) {
-      API_URL += `${searchExpression}`;
-    }
-    else {
-      listAllClicked = "True";
-    } 
-  }
-  // fetch(API_URL)
-  //   .then((data) => data.json())
-  //   .then(buildQuoteTable); 
-}
-function listAllCryptoArray (responses) {
-  function findCryptoInput (response){
-    return response.name.toLowerCase() === searchExpression;
-    debugger;
-  }
-  debugger;
+    );
 }
 function buildQuoteTable(response) {
+  debugger;
+  alert(response[arrayIndex].name)
   if (!Array.isArray(response)) {
     response = [response];
   }

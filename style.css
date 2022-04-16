@@ -50,3 +50,8 @@ html {
   .search-section {
     margin-bottom: 10px;
   }
+  .input-field-note {
+    position: relative;
+    margin-left: 173px;
+    margin-top: 5px;
+  }
