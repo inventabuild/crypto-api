@@ -1,4 +1,3 @@
-// const inputField = document.querySelector("[name=userInput]");
 const inputField = document.querySelector(".js-cryptoInputField");
 const form = document.querySelector(".js-form");
 const cryptoInputField = document.querySelector(".js-cryptoInputField");
@@ -14,6 +13,7 @@ form.addEventListener("submit", cryptoQuote);
 function cryptoQuote(event) {
   event.preventDefault();
   theader.style.visibility="hidden";
+  listAllClicked = false;
   document.querySelector(".js-quote-tbody").style.fontSize = "16px";
   searchExpression = inputField.value;
   inputField.value = "";
@@ -36,7 +36,8 @@ function cryptoQuote(event) {
       }
       arrayIndex = findCryptoIndex(responses)
       if (arrayIndex === -1 && searchExpression.length > 0) {
-        document.querySelector(".js-quote-tbody").style.fontSize = "25px";
+        document.querySelector(".js-quote-tbody").style.fontSize = "18px";
+        document.querySelector(".js-quote-tbody").style.fontWeight = "bold";
         document.querySelector(".js-quote-tbody").innerHTML = "You're selection is not in our database.  Please try again.";
         return false;
       }
@@ -45,27 +46,25 @@ function cryptoQuote(event) {
     );
 }
 function buildQuoteTable(response) {
-  debugger;
-  alert(response[arrayIndex].name)
-  if (!Array.isArray(response)) {
-    response = [response];
-  }
-  let sortedArray = response.sort(cryptoNameCompare)
-  if (listAllClicked = "False") {
-    let filterbyName = response.filter(cryptoByName)
+  const finalCryptoArray = []
+  if (listAllClicked === false) {
+    finalCryptoArray.push(response[arrayIndex])
+  } else {
+    Array.prototype.push.apply(finalCryptoArray, response);
+    let sortedArray = finalCryptoArray.sort(cryptoNameCompare)
   }
   var header = "";
   var row = "";
   html = ""
   theader.style.visibility="visible";
   document.querySelector(".js-quote-tbody").innerHTML=""
-  for (let i = 0; i < response.length; i++) {
+  for (let i = 0; i < finalCryptoArray.length; i++) {
     try{
     row = `<tr>
-            <td>${response[i].name}</td>
-            <td>${response[i].symbol}</td>
-            <td>${response[i].market_data.current_price.usd}</td>
-            <td>${response[i].market_data.price_change_percentage_200d}</td>       
+            <td>${finalCryptoArray[i].name}</td>
+            <td>${finalCryptoArray[i].symbol}</td>
+            <td>${finalCryptoArray[i].market_data.current_price.usd}</td>
+            <td>${finalCryptoArray[i].market_data.price_change_percentage_200d}</td>       
           </tr>`;
           html = html += row;
     }
@@ -81,10 +80,5 @@ function buildQuoteTable(response) {
       return -1
     }
   }
-  function cryptoByName (response) {
-    debugger;
-    return response.name.toLowerCase() === searchExpression;
-  }
-  
   document.querySelector(".js-quote-tbody").innerHTML = html;
 }

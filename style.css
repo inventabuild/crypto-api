@@ -8,6 +8,18 @@ html {
     background-color: rgb(30, 30, 30);
     color: rgb(220, 220, 220);
   }
+  th, td {
+    border-style: solid;
+    border-color: rgb(88, 88, 88);
+    border-width: 1px;
+    column-width: 225px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+  }
+  th {
+    border-style: none;
+  }
   button {
     height: 38px;
     width: 100px;
@@ -36,15 +48,7 @@ html {
   .css-crypto-container {
     margin-top: 15px;
   }
-  .quote-table-format td,
-  th {
-    text-align: left;
-    border: 1px solid black;
-  }
-  .quote-table-format {
-    border-collapse: collapse;
-  }
-  .thead-visibility{
+  .thead-visibility {
     visibility: hidden;
   }
   .search-section {
