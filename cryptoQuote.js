@@ -6,8 +6,13 @@ const searchBtn = document.querySelector(".js-search");
 const theader = document.querySelector(".thead-visibility");
 var listAllClicked = false;
 var html = "";
-var searchExpression = ""
-var arrayIndex = ""
+var searchExpression = "";
+var arrayIndex = "";
+
+let dollarUSLocale = Intl.NumberFormat('en-US', {
+  style: "currency",
+  currency: "USD",
+});
 
 form.addEventListener("submit", cryptoQuote);
 function cryptoQuote(event) {
@@ -21,7 +26,7 @@ function cryptoQuote(event) {
   searchExpression = searchExpressionLowerCase.trim();
   if (searchExpression.length === 0) {
     listAllClicked = true;
-  }
+  };
   let API_URL = `https://api.coingecko.com/api/v3/coins/`;
   fetch(API_URL)
     .then((data) => data.json())
@@ -29,12 +34,12 @@ function cryptoQuote(event) {
       function findCryptoIndex(response) {
       for (i = 0; i < response.length; i+=1 ) {
         if (response[i].name.toLowerCase() === searchExpression) {
-          return i
+          return i;
         }
       }
-      return -1
+      return -1;
       }
-      arrayIndex = findCryptoIndex(responses)
+      arrayIndex = findCryptoIndex(responses);
       if (arrayIndex === -1 && searchExpression.length > 0) {
         document.querySelector(".js-quote-tbody").style.fontSize = "18px";
         document.querySelector(".js-quote-tbody").style.fontWeight = "bold";
@@ -46,25 +51,25 @@ function cryptoQuote(event) {
     );
 }
 function buildQuoteTable(response) {
-  const finalCryptoArray = []
+  const finalCryptoArray = [];
   if (listAllClicked === false) {
-    finalCryptoArray.push(response[arrayIndex])
+    finalCryptoArray.push(response[arrayIndex]);
   } else {
     Array.prototype.push.apply(finalCryptoArray, response);
-    let sortedArray = finalCryptoArray.sort(cryptoNameCompare)
+    let sortedArray = finalCryptoArray.sort(cryptoNameCompare);
   }
   var header = "";
   var row = "";
-  html = ""
+  html = "";
   theader.style.visibility="visible";
-  document.querySelector(".js-quote-tbody").innerHTML=""
+  document.querySelector(".js-quote-tbody").innerHTML="";
   for (let i = 0; i < finalCryptoArray.length; i++) {
     try{
     row = `<tr>
             <td>${finalCryptoArray[i].name}</td>
             <td>${finalCryptoArray[i].symbol}</td>
-            <td>${finalCryptoArray[i].market_data.current_price.usd}</td>
-            <td>${finalCryptoArray[i].market_data.price_change_percentage_200d}</td>       
+            <td>${dollarUSLocale.format(finalCryptoArray[i].market_data.current_price.usd)}</td>
+            <td>${finalCryptoArray[i].market_data.price_change_percentage_200d}</td>     
           </tr>`;
           html = html += row;
     }
@@ -77,7 +82,7 @@ function buildQuoteTable(response) {
     if (response1.name.toUpperCase() > response2.name.toUpperCase()) {
       return 1;
     } else {
-      return -1
+      return -1;
     }
   }
   document.querySelector(".js-quote-tbody").innerHTML = html;
