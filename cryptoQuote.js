@@ -10,6 +10,7 @@ var searchExpression = "";
 var arrayIndex = "";
 
 let dollarUSLocale = Intl.NumberFormat('en-US', {
+  maximumFractionDigits: 20,
   style: "currency",
   currency: "USD",
 });
@@ -63,13 +64,19 @@ function buildQuoteTable(response) {
   html = "";
   theader.style.visibility="visible";
   document.querySelector(".js-quote-tbody").innerHTML="";
+  let mvgAvg200Day = ""
   for (let i = 0; i < finalCryptoArray.length; i++) {
+    if (isNaN(finalCryptoArray[i].market_data.price_change_percentage_200d_in_currency.usd)) {
+      mvgAvg200Day = "Note enough data"}
+    else{
+      mvgAvg200Day = finalCryptoArray[i].market_data.price_change_percentage_200d
+    }
     try{
     row = `<tr>
             <td>${finalCryptoArray[i].name}</td>
             <td>${finalCryptoArray[i].symbol}</td>
             <td>${dollarUSLocale.format(finalCryptoArray[i].market_data.current_price.usd)}</td>
-            <td>${finalCryptoArray[i].market_data.price_change_percentage_200d}</td>     
+            <td>${mvgAvg200Day}</td>     
           </tr>`;
           html = html += row;
     }
